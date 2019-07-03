@@ -21,3 +21,13 @@ docker build -t welcome-app-golang:scratch -f Dockerfile.scratch
 docker run -it -p 8080:8080 welcome-app-golang:scratch
 CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main.out .
 ```
+### Push the image to the registry
+```
+docker tag welcome-app-golang:scratch kamenevlabs.azurecr.io/welcome-app-golang:v1
+docker push kamenevlabs.azurecr.io/welcome-app-golang:v1
+```
+
+### Build in Azure
+```
+az acr build --registry kamenevlabs --image welcome-app-big:v0.1 .
+```
