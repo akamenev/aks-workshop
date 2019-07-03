@@ -29,5 +29,7 @@ docker push kamenevlabs.azurecr.io/welcome-app-golang:v1
 
 ### Build in Azure
 ```
+az login
+az acr login --name kamenevlabs --resource-group container-registry
 az acr build --registry kamenevlabs --image welcome-app-big:v0.1 .
 ```
