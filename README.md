@@ -1,7 +1,7 @@
-# aks-workshop
+# AKS Workshop
 Repo for AKS Workshop content
 
-## Building the app image
+## Docker Image Creation, Azure Container Registry, Azure Container Instances
 ### Running the app with go run
 ```
 go run main.go
