@@ -47,5 +47,5 @@ kubectl apply -f welcome-apps-service.yaml
 kubectl get svc
 ```
 ```
-kubectl scale deployemtn welcome-app --replicas=4
+kubectl scale deployment welcome-app --replicas=4
 ```
