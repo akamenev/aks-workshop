@@ -5,17 +5,19 @@ import (
 	"html/template"
 	"net/http"
 	"time"
+	"os"
 )
 
 type Welcome struct {
 	Name string
 	Time string
+	Hostname string
 }
 
 
 func main() {
-
-	welcome := Welcome{"Anonymous", time.Now().Format(time.Stamp)}
+	hostname, errhost := os.Hostname()
+	welcome := Welcome{"Anonymous", time.Now().Format(time.Stamp), "hostname"}
 
 	templates := template.Must(template.ParseFiles("templates/welcome-template.html"))
 	http.Handle("/static/", 
@@ -34,6 +36,10 @@ func main() {
 		}
 	})
 
+	if errhost == nil {
+		fmt.Println("Served by: ", hostname)
+		welcome.Hostname = hostname
+	}
 	fmt.Println("Listening on Port 8080")
 	fmt.Println(http.ListenAndServe(":8080", nil))
 }
