@@ -73,3 +73,6 @@ az acr helm list --name kamenevlabs
 helm repo update
 helm install kamenevlabs/welcome-app
 ```
+```
+helm fetch stable/wordpress --untar
+```
