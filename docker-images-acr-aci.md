@@ -29,11 +29,17 @@ docker run -it -p 8080:8080 welcome-app-golang:v1
 Try to open a welcome-app again at `http://localhost:8080`
 
 ### Building the image with scratch base image
+Run the `docker images` command to see the welcome-app image size. It is more than 800 MB which is pretty big for a small app like that. For a compiled languages we can build a static binary that we can use with a `sratch` docker image as a base. Open the `Dockerfile` and `Dockerfile.scratch` files in editor to see the difference.
+
+Build a Go binary and build a new docker image.
+
 ```
 CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main.out .
 docker build -t welcome-app-scratch:v1 -f Dockerfile.scratch .
 docker run -it -p 8080:8080 welcome-app-scratch:v1
 ```
+Open a welcome-app again at `http://localhost:8080` and check the size of the image via `docker images`
+
 ### Push the image to the registry
 ```
 docker tag welcome-app-scratch:v1 kamenevlabs.azurecr.io/welcome-app:v1
