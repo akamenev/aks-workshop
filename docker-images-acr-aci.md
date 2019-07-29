@@ -35,6 +35,7 @@ Build a Go binary and build a new docker image.
 
 ```bash
 CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main.out .
+
 docker build -t welcome-app-scratch:v1 -f Dockerfile.scratch .
 docker run -it -p 8080:8080 welcome-app-scratch:v1
 ```
@@ -45,6 +46,7 @@ Specify Resource Group and Registry names and create ACR
 ```bash
 RG_NAME=...
 REGISTRY_NAME=...
+
 az login
 az group create -n $RG_NAME -l westeurope
 az acr create --name $REGISTRY_NAME --resource-group $RG_NAME --sku basic --location westeurope --admin-enabled true
@@ -68,6 +70,7 @@ Run welcome-app on Azure Container Instance
 ```bash
 PASSWORD=$(az acr credential show -n $REGISTRY_NAME --query "passwords[0].value" -o tsv)
 DNS_LABEL=...
+
 az group create -n welcome-app -l westeurope
 az container create -n welcome-app -g welcome-app --image "$REGISTRY_NAME.azurecr.io/welcome-app:v1" --registry-username "$REGISTRY_NAME" --registry-password "$PASSWORD" --ports 8080 --dns-name-label $DNS_LABEL
 ```
