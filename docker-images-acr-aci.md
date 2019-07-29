@@ -44,8 +44,8 @@ Open a welcome-app again at `http://localhost:8080` and check the size of the im
 ### Create an Azure Container Registry
 Specify Resource Group and Registry names and create ACR
 ```bash
-RG_NAME=...
-REGISTRY_NAME=...
+export RG_NAME=...
+export REGISTRY_NAME=...
 
 az login
 az group create -n $RG_NAME -l westeurope
@@ -68,8 +68,8 @@ az acr build --registry $REGISTRY_NAME --image welcome-app-acrbuild:v1 -f Docker
 ### Run in container instance
 Run welcome-app on Azure Container Instance
 ```bash
-PASSWORD=$(az acr credential show -n $REGISTRY_NAME --query "passwords[0].value" -o tsv)
-DNS_LABEL=...
+export PASSWORD=$(az acr credential show -n $REGISTRY_NAME --query "passwords[0].value" -o tsv)
+export DNS_LABEL=...
 
 az group create -n welcome-app -l westeurope
 az container create -n welcome-app -g welcome-app --image "$REGISTRY_NAME.azurecr.io/welcome-app:v1" --registry-username "$REGISTRY_NAME" --registry-password "$PASSWORD" --ports 8080 --dns-name-label $DNS_LABEL
