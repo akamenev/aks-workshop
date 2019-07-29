@@ -1,4 +1,10 @@
 ## Docker Image Creation, Azure Container Registry, Azure Container Instances
+
+### Prerequisites:
+
+1. Azure Subscription
+2. Local Docker installation ([Linux](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce), [Mac](https://docs.docker.com/docker-for-mac/install/) or [Windows](https://docs.docker.com/docker-for-windows/install/))
+
 ### Running the app with go run
 ```
 go run main.go
