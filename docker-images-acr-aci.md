@@ -7,13 +7,13 @@
 3. Local Docker installed ([Linux](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce), [Mac](https://docs.docker.com/docker-for-mac/install/) or [Windows](https://docs.docker.com/docker-for-windows/install/))
 
 ### Clone the repo
-```
+```bash
 git clone https://github.com/akamenev/aks-workshop.git
 ```
 
 ### Running the app with go run
 Inside the cloned repo go to a welcome-app folder and run the app
-```
+```bash
 cd welcome-app
 go run main.go
 ```
@@ -21,7 +21,7 @@ Open `http://localhost:8080` in your browser and see the welcome app screen. You
 
 ### Building the image with golang base image
 Pull the golang image from Dockerhub, build the container and run it
-```
+```bash
 docker pull golang
 docker build -t welcome-app-golang:v1 .
 docker run -it -p 8080:8080 welcome-app-golang:v1
@@ -33,7 +33,7 @@ Run the `docker images` command to see the welcome-app image size. It is more th
 
 Build a Go binary and build a new docker image.
 
-```
+```bash
 CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main.out .
 docker build -t welcome-app-scratch:v1 -f Dockerfile.scratch .
 docker run -it -p 8080:8080 welcome-app-scratch:v1
@@ -42,7 +42,7 @@ Open a welcome-app again at `http://localhost:8080` and check the size of the im
 
 ### Create an Azure Container Registry
 Specify Resource Group and Registry names and create ACR
-```
+```bash
 RG_NAME=...
 REGISTRY_NAME=...
 az login
@@ -51,7 +51,7 @@ az acr create --name $REGISTRY_NAME --resource-group $RG_NAME --sku basic --loca
 ```
 
 ### Push the image to the registry
-```
+```bash
 docker tag welcome-app-scratch:v1 $REGISTRY_NAME.azurecr.io/welcome-app:v1
 az acr login --name $REGISTRY_NAME
 docker push $REGISTRY_NAME.azurecr.io/welcome-app:v1
@@ -59,13 +59,13 @@ docker push $REGISTRY_NAME.azurecr.io/welcome-app:v1
 
 ### Build in Azure
 With ACR you don't even need a docker installed locally, you can build your images using ACR.
-```
+```bash
 az acr build --registry $REGISTRY_NAME --image welcome-app-acrbuild:v1 -f Dockerfile.scratch .
 ```
 
 ### Run in container instance
 Run welcome-app on Azure Container Instance
-```
+```bash
 PASSWORD=$(az acr credential show -n $REGISTRY_NAME --query "passwords[0].value" -o tsv)
 DNS_LABEL=...
 az group create -n welcome-app -l westeurope
