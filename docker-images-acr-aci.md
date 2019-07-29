@@ -12,7 +12,7 @@ git clone https://github.com/akamenev/aks-workshop.git
 ```
 
 ### Running the app with go run
-Inside the cloned repo go to a welcome-app folder and run the app
+Inside the cloned repo go to a `welcome-app` folder and run the app
 ```bash
 cd welcome-app
 go run main.go
