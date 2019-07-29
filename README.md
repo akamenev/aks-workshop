@@ -1,10 +1,10 @@
 # AKS Workshop
 Repo for AKS Workshop content
 
-## Content:
+## Table of Contents:
 
 
-1. [Docker Image Creation, Azure Container Registry, Azure Container Instances](https://github.com/akamenev/aks-workshop/blob/master/01-Docker-Images-ACR-ACI.md)
+* [Docker Image Creation, Azure Container Registry, Azure Container Instances](https://github.com/akamenev/aks-workshop/blob/master/Docker-Images-ACR-ACI.md)
 
 ## Creating Pods, Deployments, Services
 ```
