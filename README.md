@@ -4,23 +4,9 @@ Repo for AKS Workshop content
 ## Table of Contents:
 
 
-* [Docker Image Creation, Azure Container Registry, Azure Container Instances](https://github.com/akamenev/aks-workshop/blob/master/Docker-Images-ACR-ACI.md)
+* [Docker Image Creation, Azure Container Registry, Azure Container Instances](https://github.com/akamenev/aks-workshop/blob/master/docker-images-acr-aci.md)
+* [Creating Pods, Deployments, Services](https://github.com/akamenev/aks-workshop/blob/master/creating-pods-deployments-services.md)
 
-## Creating Pods, Deployments, Services
-```
-kubectl apply -f simple-pod-nginx.yaml
-```
-```
-kubectl create secret docker-registry kamenevlabs --docker-server=kamenevlabs.azurecr.io --docker-username=kamenevlabs --docker-password=$password --docker-email=EMAIL
-```
-```
-kubectl apply -f welcome-app-deployment.yaml
-kubectl apply -f welcome-apps-service.yaml
-kubectl get svc
-```
-```
-kubectl scale deployment welcome-app --replicas=4
-```
 
 ## Helm, creating, deploying and pushing a chart
 ```
