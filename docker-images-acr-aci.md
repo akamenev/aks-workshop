@@ -40,22 +40,34 @@ docker run -it -p 8080:8080 welcome-app-scratch:v1
 ```
 Open a welcome-app again at `http://localhost:8080` and check the size of the image via `docker images`
 
+### Create an Azure Container Registry
+Specify Resource Group and Registry names and create ACR
+```
+RG_NAME=...
+REGISTRY_NAME=...
+az login
+az group create -n $RG_NAME -l westeurope
+az acr create --name $REGISTRY_NAME --resource-group $RG_NAME --sku basic --location westeurope --admin-enabled true
+```
+
 ### Push the image to the registry
 ```
-docker tag welcome-app-scratch:v1 kamenevlabs.azurecr.io/welcome-app:v1
-az login
-az acr login --name kamenevlabs
-docker push kamenevlabs.azurecr.io/welcome-app:v1
+docker tag welcome-app-scratch:v1 $REGISTRY_NAME.azurecr.io/welcome-app:v1
+az acr login --name $REGISTRY_NAME
+docker push $REGISTRY_NAME.azurecr.io/welcome-app:v1
 ```
 
 ### Build in Azure
+With ACR you don't even need a docker installed locally, you can build your images using ACR.
 ```
-az acr build --registry kamenevlabs --image welcome-app-acrbuild:v1 -f Dockerfile.scratch .
+az acr build --registry $REGISTRY_NAME --image welcome-app-acrbuild:v1 -f Dockerfile.scratch .
 ```
 
 ### Run in container instance
+Run welcome-app on Azure Container Instance
 ```
-password=$(az acr credential show-n kamenevlabs --query "passwords[0].value" -o tsv)
+PASSWORD=$(az acr credential show -n $REGISTRY_NAME --query "passwords[0].value" -o tsv)
+DNS_LABEL=...
 az group create -n welcome-app -l westeurope
-az container create -n welcome-app -g welcome-app --image "kamenevlabs.azurecr.io/welcome-app:v1" --registry-username "kamenevlabs" --registry-password "$password" --ports 8080 --dns-name-label welcomeapptest
+az container create -n welcome-app -g welcome-app --image "$REGISTRY_NAME.azurecr.io/welcome-app:v1" --registry-username "$REGISTRY_NAME" --registry-password "$PASSWORD" --ports 8080 --dns-name-label $DNS_LABEL
 ```
