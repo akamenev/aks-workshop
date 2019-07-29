@@ -3,7 +3,8 @@
 ### Prerequisites:
 
 1. Azure Subscription
-2. Local Docker installation ([Linux](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce), [Mac](https://docs.docker.com/docker-for-mac/install/) or [Windows](https://docs.docker.com/docker-for-windows/install/))
+2. [Golang](https://golang.org/doc/install) installed
+3. Local Docker installation ([Linux](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce), [Mac](https://docs.docker.com/docker-for-mac/install/) or [Windows](https://docs.docker.com/docker-for-windows/install/))
 
 ### Running the app with go run
 ```
