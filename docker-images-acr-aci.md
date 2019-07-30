@@ -59,7 +59,7 @@ az acr login --name $REGISTRY_NAME
 docker push $REGISTRY_NAME.azurecr.io/welcome-app:v1
 ```
 
-### Build in Azure
+### Build in Azure Container Registry
 With ACR you don't even need a docker installed locally, you can build your images using ACR.
 ```bash
 az acr build --registry $REGISTRY_NAME --image welcome-app-acrbuild:v1 -f Dockerfile.scratch .
