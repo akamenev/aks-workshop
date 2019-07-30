@@ -75,3 +75,9 @@ kubectl get svc
 kubectl scale deployment welcome-app --replicas=4
 kubectl get pods
 ```
+### Remove the apps
+```bash
+kubectl delete -f simple-pod-nginx.yaml
+kubectl delete -f welcome-app-deployment.yaml
+kubectl delete -f welcome-app-service.yaml
+```
