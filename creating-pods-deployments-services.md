@@ -36,7 +36,7 @@ kubectl create secret docker-registry $REGISTRY_NAME --docker-server=$REGISTRY_N
 ```
 
 ### Deploy a welcome-app and scale it
-1. Open `welcome-app-deployment.yaml` and replace REGISTRY_NAME with your registry name:
+1. Open `welcome-app-deployment.yaml` and replace REGISTRY_NAME with your registry name or use the command `sed` command below:
 ```yaml
 ...
       containers:
@@ -54,11 +54,17 @@ kubectl create secret docker-registry $REGISTRY_NAME --docker-server=$REGISTRY_N
       imagePullSecrets:
       - name: REGISTRY_NAME
 ```
+
+```bash
+sed -i "s/REGISTRY_NAME/$REGISTRY_NAME/g" welcome-app-deployment.yaml
+```
+
 2. Create welcome-app deployment and service
 ```bash
 kubectl apply -f welcome-app-deployment.yaml
 kubectl apply -f welcome-app-service.yaml
 ```
+
 3. Retrieve an external service IP and go to a wecome-app at `http://public_ip`. Note: it can take several minutes for AKS to obtain a public IP
 ```
 kubectl get svc
