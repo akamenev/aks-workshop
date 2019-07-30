@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: welcome-app
-        image: kamenevlabs.azurecr.io/welcome-app:v1
+        image: REGISTRY_NAME.azurecr.io/welcome-app:v1
         ports:
         - containerPort: 8080
         resources:
@@ -24,4 +24,4 @@ spec:
             cpu: 150m
             memory: 128Mi
       imagePullSecrets:
-      - name: kamenevlabs
+      - name: REGISTRY_NAME
