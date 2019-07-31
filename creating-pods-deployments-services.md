@@ -14,7 +14,7 @@ export AKS_NAME=..
 az group create --name $AKS_RG --location westeurope
 az aks create --resource-group $AKS_RG --name $AKS_NAME --generate-ssh-keys
 az aks install-cli
-az aks get-credentials --name $AKS_NAME --resource-gorup $AKS_RG
+az aks get-credentials --name $AKS_NAME --resource-group $AKS_RG
 kubectl get nodes
 ```
 
