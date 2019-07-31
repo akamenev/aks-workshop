@@ -18,7 +18,7 @@ Open `value.yaml` and `deployment.yaml` files inside the `welcome-app` and `welc
 ```yaml
 ...
 image:
-  repository: REGISTRY_NAME.azurecr.io/welcome-app-golang
+  repository: REGISTRY_NAME.azurecr.io/welcome-app
   tag: v1
   pullPolicy: IfNotPresent
 ...
