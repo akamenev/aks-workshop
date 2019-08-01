@@ -1,5 +1,5 @@
 ## Autoscaling in AKS
-This part is based on aksworkshop.io
+This part is based on [aksworkshop.io](https://aksworkshop.io/)
 ### Prerequisites:
 
 1. Azure Subscription
