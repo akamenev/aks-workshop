@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: welcome-app
+spec:
+  tls:
+  - hosts:
+    - INGRESS_IP.nip.io
+    secretName: welcome-tls-secret
+  rules:
+  - host: INGRESS_IP.nip.io
+    http:
+      paths:
+      - backend:
+          serviceName: welcome-app
+          servicePort: 80
+        path: /
