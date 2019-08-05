@@ -10,3 +10,4 @@ Repo for AKS Workshop content
 * [Creating Ingress](https://github.com/akamenev/aks-workshop/blob/master/ingress.md)
 * [Get Started with Azure Dev Spaces with Node.js](https://docs.microsoft.com/en-us/azure/dev-spaces/get-started-nodejs)
 * [Autoscaling in AKS](https://github.com/akamenev/aks-workshop/blob/master/scaling.md)
+* [Secure traffic between pods using network policies](https://docs.microsoft.com/en-us/azure/aks/use-network-policies)
