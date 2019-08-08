@@ -1,11 +1,12 @@
-## Autoscaling in AKS
+# Autoscaling in AKS
 This part is based on [aksworkshop.io](https://aksworkshop.io/)
-### Prerequisites:
+## Prerequisites:
 
 1. Azure Subscription
 2. Helm - [installation guide](https://helm.sh/docs/using_helm/#installing-helm)
+3. [Azure CLI installed](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 
-### Create an AKS cluster with the cluster autoscaler
+## Create an AKS cluster with the cluster autoscaler
 
 ```bash
 export AKS_RG=...
@@ -53,7 +54,7 @@ az aks create --resource-group $AKS_RG \
  az aks get-credentials --resource-group $AKS_RG --name $AKS_NAME
 ```
 
-### Initialize helm
+## Initialize helm
 Inside the cloned repo go to `scaling` folder and run:
 ```bash
 kubectl apply -f helm-rbac.yaml
@@ -61,7 +62,7 @@ helm init --service-account tiller
 kubectl get pods -n kube-system | grep tiller
 ```
 
-### Deploy MongoDB
+## Deploy MongoDB
 After you have Tiller initialized in the cluster, wait for a short while then install the MongoDB chart, then take note of the username, password and endpoints created. The command below creates a user called orders-user and a password of orders-password
 ```bash
 helm install stable/mongodb --name orders-mongo --set mongodbUsername=orders-user,mongodbPassword=orders-password,mongodbDatabase=akschallenge
@@ -71,7 +72,7 @@ In the previous step, you installed MongoDB using Helm, with a specified usernam
 kubectl create secret generic mongodb --from-literal=mongoHost="orders-mongo-mongodb.default.svc.cluster.local" --from-literal=mongoUser="orders-user" --from-literal=mongoPassword="orders-password"
 ```
 
-### Deploy Order Capture API
+## Deploy Order Capture API
 You need to deploy the Order Capture API `(azch/captureorder)`. This requires an external endpoint, exposing the API on port 80 and needs to write to MongoDB.
 ```bash
 kubectl apply -f captureorder-deployment.yaml
@@ -88,7 +89,7 @@ export API_IP=$(kubectl get service captureorder -o jsonpath="{.status.loadBalan
 curl -d '{"EmailAddress": "email@domain.com", "Product": "prod-1", "Total": 100}' -H "Content-Type: application/json" -X POST http://$API_IP/v1/order
 ```
 
-### Run a baseline load test
+## Run a baseline load test
 
 There is a a container image on Docker Hub `(azch/loadtest)` that is preconfigured to run the load test. You may run it in Azure Container Instances running the command below
 ```bash
@@ -109,7 +110,7 @@ az container delete -g $RG_LOAD -n loadtest
 ```
 Make note of results (sample below), figure out what is the breaking point for the number of users.
 
-### Create Horizontal Pod Autoscaler
+## Create Horizontal Pod Autoscaler
 
 Horizontal Pod Autoscaler allows Kubernetes to detect when your deployed pods need more resources and then it schedules more pods onto the cluster to cope with the demand.
 See the `captureorder-hpa.yaml` in the `scaling` folder and deploy it:

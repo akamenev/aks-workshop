@@ -13,3 +13,4 @@
 
 # Helm package
 .tgz
+credentials-velero

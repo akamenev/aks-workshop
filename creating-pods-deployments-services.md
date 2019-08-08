@@ -1,11 +1,12 @@
-## Creating Pods, Deployments, Services
+# Creating Pods, Deployments, Services
 
-### Prerequisites:
+## Prerequisites:
 
 1. Azure Subscription
 2. Completed steps from [Docker Image Creation, Azure Container Registry, Azure Container Instances](https://github.com/akamenev/aks-workshop/blob/master/docker-images-acr-aci.md)
+3. [Azure CLI installed](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 
-### Create a managed Kubernetes cluster (AKS)
+## Create a managed Kubernetes cluster (AKS)
 
 ```bash
 export AKS_RG=...
@@ -18,7 +19,7 @@ az aks get-credentials --name $AKS_NAME --resource-group $AKS_RG
 kubectl get nodes
 ```
 
-### Create a simple pod
+## Create a simple pod
 Inside the cloned repo go to a `kube-concepts` folder, create a pod and verify that it is running:
 
 ```bash
@@ -27,7 +28,7 @@ kubectl apply -f simple-pod-nginx.yaml
 kubectl get pods
 ```
 
-### Create a secret to store ACR credentials
+## Create a secret to store ACR credentials
 
 ```bash
 export EMAIL=...
@@ -35,7 +36,7 @@ export EMAIL=...
 kubectl create secret docker-registry $REGISTRY_NAME --docker-server=$REGISTRY_NAME.azurecr.io --docker-username=$REGISTRY_NAME --docker-password=$PASSWORD --docker-email=$EMAIL
 ```
 
-### Deploy a welcome-app and scale it
+## Deploy a welcome-app and scale it
 1. Open `welcome-app-deployment.yaml` and replace REGISTRY_NAME with your registry name or use the command `sed` command below:
 ```yaml
 ...
@@ -75,7 +76,7 @@ kubectl get svc
 kubectl scale deployment welcome-app --replicas=4
 kubectl get pods
 ```
-### Remove the apps
+## Remove the apps
 ```bash
 kubectl delete -f simple-pod-nginx.yaml
 kubectl delete -f welcome-app-deployment.yaml

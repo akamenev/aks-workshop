@@ -1,12 +1,13 @@
-## Creating Ingress
+# Creating Ingress
 
-### Prerequisites:
+## Prerequisites:
 
 1. Azure Subscription
 2. Completed steps from [Docker Image Creation, Azure Container Registry, Azure Container Instances](https://github.com/akamenev/aks-workshop/blob/master/docker-images-acr-aci.md) and [Creating Pods, Deployments, Services](https://github.com/akamenev/aks-workshop/blob/master/creating-pods-deployments-services.md)
 3. Helm - [installation guide](https://helm.sh/docs/using_helm/#installing-helm)
+4. [Azure CLI installed](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 
-### Create welcome-app deployment and service
+## Create welcome-app deployment and service
 Inside the cloned repo go to `ingress` folder open `welcome-app-deployment.yaml` and replace REGISTRY_NAME with your registry name or use the command `sed` command below:
 ```yaml
 ...
@@ -35,7 +36,7 @@ kubectl apply -f welcome-app-deployment.yaml
 kubectl apply -f welcome-app-service-ingress.yaml
 ```
 
-### Initialize helm
+## Initialize helm
 Inside the cloned repo go to `helm-demo` folder and run:
 ```
 kubectl apply -f helm-rbac.yaml
@@ -43,7 +44,7 @@ helm init --service-account tiller
 kubectl get pods -n kube-system | grep tiller
 ```
 
-### Deploy the ingress controller with Helm
+## Deploy the ingress controller with Helm
 
 We will leverage the nip.io reverse wildcard DNS resolver service to map our ingress controller LoadBalancerIP to a proper DNS name.
 
@@ -94,7 +95,7 @@ kubectl apply -f welcome-ingress.yaml
 ```
 Once the Ingress is deployed, you should be able to access the welcome app at http://INGRESS_IP.nip.io, for example http://52.255.217.198.nip.io
 
-### Emable SSL/TLS on Ingress
+## Emable SSL/TLS on Ingress
 
 You want to enable connecting to the welcome app over SSL/TLS. In this task, you’ll use Let’s Encrypt free service to generate valid SSL certificates for your domains, and you’ll integrate the certificate issuance workflow into Kubernetes.
 
