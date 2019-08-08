@@ -5,6 +5,24 @@ This part is covering security topics in AKS. All the examples are from Microsof
 * [Use pod security policies](https://docs.microsoft.com/en-us/azure/aks/use-pod-security-policies)
 For more accurate and up-to-date information please refer to these links.
 
+## Table of Contents:
+
+- [Prerequisites](https://github.com/akamenev/aks-workshop/blob/master/security.md#prerequisites)
+- [Register pod security policy feature provider](https://github.com/akamenev/aks-workshop/blob/master/security.md#register-pod-security-policy-feature-provider)
+- [Create an AKS cluster](https://github.com/akamenev/aks-workshop/blob/master/security.md#create-an-aks-cluster)
+- [Secure pod traffic with network policies](https://github.com/akamenev/aks-workshop/blob/master/security.md#secure-pod-traffic-with-network-policies)
+  - [Deny all inbound traffic to a pod](https://github.com/akamenev/aks-workshop/blob/master/security.md#deny-all-inbound-traffic-to-a-pod)
+  - [Allow inbound traffic based on pod label](https://github.com/akamenev/aks-workshop/blob/master/security.md#allow-inbound-traffic-based-on-pod-label)
+  - [Allow traffic only from within a defined namespace](https://github.com/akamenev/aks-workshop/blob/master/security.md#allow-traffic-only-from-within-a-defined-namespace)
+- [Use pod security policies](https://github.com/akamenev/aks-workshop/blob/master/security.md#use-pod-security-policies)
+  - [Create a test user in an AKS cluster](https://github.com/akamenev/aks-workshop/blob/master/security.md#create-a-test-user-in-an-aks-cluster)
+  - [Test the creation of a privileged pod](https://github.com/akamenev/aks-workshop/blob/master/security.md#test-the-creation-of-a-privileged-pod)
+  - [Test the creation of an unprivileged pod](https://github.com/akamenev/aks-workshop/blob/master/security.md#test-the-creation-of-an-unprivileged-pod)
+  - [Test the creation of a pod with a specific user context](https://github.com/akamenev/aks-workshop/blob/master/security.md#test-the-creation-of-a-pod-with-a-specific-user-context)
+  - [Create a custom pod security policy](https://github.com/akamenev/aks-workshop/blob/master/security.md#create-a-custom-pod-security-policy)
+  - [Allow user account to use the custom pod security policy](https://github.com/akamenev/aks-workshop/blob/master/security.md#allow-user-account-tu-use-the-custom-pod-security-policy)
+  - [Test the creation of an unprivileged pod again](https://github.com/akamenev/aks-workshop/blob/master/security.md#test-the-creation-of-an-unprivileged-pod-again)
+
 ## Prerequisites:
 
 1. Azure Subscription
@@ -261,7 +279,7 @@ Before you move on to the next step, delete this test pod using the kubectl dele
 kubectl-nonadminuser delete -f nginx-unprivileged.yaml
 ```
 
-### Test creation of a pod with a specific user context
+### Test the creation of a pod with a specific user context
 In the previous example, the container image automatically tried to use root to bind NGINX to port 80. This request was denied by the default restricted pod security policy, so the pod fails to start. Let's try now running that same NGINX pod with a specific user context, such as `runAsUser: 2000`.
 
 Create the pod using the `nginx-unprivileged-nonroot.yaml` manifest:
@@ -302,7 +320,7 @@ Create the policy using the `kubectl apply` command and specify the name of prov
 kubectl apply -f psp-deny-privileged.yaml
 ```
 
-### Allow user account tu use the custom pod security policy
+### Allow user account to use the custom pod security policy
 
 In the previous step, you created a pod security policy to reject pods that request privileged access. To allow the policy to be used, you create a Role or a ClusterRole. Then, you associate one of these roles using a RoleBinding or ClusterRoleBinding.
 
