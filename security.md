@@ -168,3 +168,9 @@ At the shell prompt, use wget to see that the network policy now denies traffic:
 wget -qO- --timeout=2 http://backend.development
 exit
 ```
+
+### Clean up resources
+```bash
+kubectl delete namespace production
+kubectl delete namespace development
+```
