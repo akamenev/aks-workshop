@@ -20,7 +20,7 @@ For more accurate and up-to-date information please refer to these links.
   - [Test the creation of an unprivileged pod](https://github.com/akamenev/aks-workshop/blob/master/security.md#test-the-creation-of-an-unprivileged-pod)
   - [Test the creation of a pod with a specific user context](https://github.com/akamenev/aks-workshop/blob/master/security.md#test-the-creation-of-a-pod-with-a-specific-user-context)
   - [Create a custom pod security policy](https://github.com/akamenev/aks-workshop/blob/master/security.md#create-a-custom-pod-security-policy)
-  - [Allow user account to use the custom pod security policy](https://github.com/akamenev/aks-workshop/blob/master/security.md#allow-user-account-tu-use-the-custom-pod-security-policy)
+  - [Allow user account to use the custom pod security policy](https://github.com/akamenev/aks-workshop/blob/master/security.md#allow-user-account-to-use-the-custom-pod-security-policy)
   - [Test the creation of an unprivileged pod again](https://github.com/akamenev/aks-workshop/blob/master/security.md#test-the-creation-of-an-unprivileged-pod-again)
 
 ## Prerequisites:
