@@ -11,3 +11,5 @@ Repo for AKS Workshop content
 * [Get Started with Azure Dev Spaces with Node.js](https://docs.microsoft.com/en-us/azure/dev-spaces/get-started-nodejs)
 * [Autoscaling in AKS](https://github.com/akamenev/aks-workshop/blob/master/scaling.md)
 * [Securing your AKS environment](https://github.com/akamenev/aks-workshop/blob/master/security.md)
+
+* [GitOps Helm Workshop from Weaveworks](https://helm.workshop.flagger.dev)
