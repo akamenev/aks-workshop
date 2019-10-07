@@ -1,5 +1,5 @@
 # AKS Workshop
-Repo for AKS Workshop content
+Repo for AKS Workshop content.
 
 ## Table of Contents:
 
