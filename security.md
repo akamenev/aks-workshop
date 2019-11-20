@@ -3,6 +3,7 @@
 This part is covering security topics in AKS. All the examples are from Microsoft docs:
 * [Secure pod traffic with network policies](https://docs.microsoft.com/en-us/azure/aks/use-network-policies)
 * [Use pod security policies](https://docs.microsoft.com/en-us/azure/aks/use-pod-security-policies)
+
 For more accurate and up-to-date information please refer to these links.
 
 ## Table of Contents:
