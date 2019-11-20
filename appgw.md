@@ -126,8 +126,34 @@ Install the Helm chart
 ```bash
 export AGIC_NAMESPACE=default
 
-helm template "${AKS_NAME}" ./helm/ingress-azure \
-     --namespace "${AGIC_NAMESPACE=}" \
-     --values "./helm-config.yaml" \
-    | tee /dev/tty | kubectl apply -f -
+kubectl apply -f pod-identity-rbac-deployment.yaml
+
+helm install agic-ingress -f helm-config.yaml \
+application-gateway-kubernetes-ingress/ingress-azure \
+--set appgw.usePrivateIP=false
 ```
+
+## Deploy the Voting and Welcome apps
+```bash
+kubectl apply -f voting-app-all.yaml
+kubectl apply -f welcome-app-deployment.yaml
+kubectl apply -f welcome-app-service.yaml
+```
+
+## Create ingress for the apps
+Get the public IP address of the Application Gateway
+```bash
+export APPGW_IP=$(az network public-ip show --resource-group $AKS_RG --name appgwPublicIP --query 'ipAddress' -o tsv)
+```
+Replace APPGWIP in `voting-app-ingress.yaml` and `welcome-app-ingress.yaml` with your value or by using `sed` command below
+```bash
+sed -i "s/APPGW_IP/$APPGW_IP/g" welcome-app-ingress.yaml
+sed -i "s/APPGW_IP/$APPGW_IP/g" voting-app-ingress.yaml
+```
+Apply ingress manifests
+```bash
+kubectl apply -f welcome-app-ingress.yaml
+kubectl apply -f voring-app-ingress.yaml
+```
+
+Check `vote.APPGW_IP.nip.io` and `result.APPGW_IP.nip.io` to see the Voting app and `welcome.APPGW_IP.nip.io` to see the Welcome app

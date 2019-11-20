@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: welcome-app
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+spec:
+  rules:
+  - host: welcome.APPGW_IP.nip.io
+    http:
+      paths:
+        - backend:
+            serviceName: welcome-app
+            servicePort: 80
+          path: /
