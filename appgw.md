@@ -1,6 +1,10 @@
-# Creating Ingress
+# Deploying Application Gateway Ingress Controller
 
+The Application Gateway Ingress Controller allows Azure Application Gateway to be used as the ingress for an Azure Kubernetes Service aka AKS cluster.
 
+As shown in the figure below, the ingress controller runs as a pod within the AKS cluster. It consumes Kubernetes Ingress Resources and converts them to an Azure Application Gateway configuration which allows the gateway to load-balance traffic to Kubernetes pods.
+
+![image](appgw/appgw.png)
 
 More info about Application Gateway Ingress Controller can be found [here](https://azure.github.io/application-gateway-kubernetes-ingress/).
 ## Prerequisites:
