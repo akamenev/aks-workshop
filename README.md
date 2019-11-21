@@ -13,3 +13,4 @@ Repo for AKS Workshop content.
 * [Autoscaling in AKS](https://github.com/akamenev/aks-workshop/blob/master/scaling.md)
 * [Securing your AKS environment](https://github.com/akamenev/aks-workshop/blob/master/security.md)
 * [GitOps Helm Workshop from Weaveworks](https://helm.workshop.flagger.dev)
+* [Deploying Application Gateway Ingress Controller](https://github.com/akamenev/aks-workshop/blob/master/appgw.md)

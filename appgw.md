@@ -157,7 +157,7 @@ sed -i "s/APPGW_IP/$APPGW_IP/g" voting-app-ingress.yaml
 Apply ingress manifests
 ```bash
 kubectl apply -f welcome-app-ingress.yaml
-kubectl apply -f voring-app-ingress.yaml
+kubectl apply -f voting-app-ingress.yaml
 ```
 
 Check `vote.APPGW_IP.nip.io` and `result.APPGW_IP.nip.io` to see the Voting app and `welcome.APPGW_IP.nip.io` to see the Welcome app
