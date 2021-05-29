@@ -35,7 +35,7 @@ Run the `docker images` command to see the welcome-app image size. It is more th
 Build a Go binary and build a new docker image.
 
 ```bash
-CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main.out .
+CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main.out main.go
 
 docker build -t welcome-app-scratch:v1 -f Dockerfile.scratch .
 docker run -it -p 8080:8080 welcome-app-scratch:v1
