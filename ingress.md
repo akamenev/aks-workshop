@@ -36,28 +36,22 @@ kubectl apply -f welcome-app-deployment.yaml
 kubectl apply -f welcome-app-service-ingress.yaml
 ```
 
-## Initialize helm
-Inside the cloned repo go to `helm-demo` folder and run:
-```
-kubectl apply -f helm-rbac.yaml
-helm init --service-account tiller
-kubectl get pods -n kube-system | grep tiller
-```
 
 ## Deploy the ingress controller with Helm
 
 We will leverage the nip.io reverse wildcard DNS resolver service to map our ingress controller LoadBalancerIP to a proper DNS name.
 
 ```bash
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
-helm upgrade --install ingress stable/nginx-ingress --namespace ingress
+helm install ingress-nginx ingress-nginx/ingress-nginx
 ```
 
 In a couple of minutes, a public IP address will be allocated to the ingress controller, retrieve with:
 ```bash
-kubectl get svc  -n ingress    ingress-nginx-ingress-controller -o jsonpath="{.status.loadBalancer.ingress[*].ip}"
+kubectl get svc ingress-nginx -o jsonpath="{.status.loadBalancer.ingress[*].ip}"
 
-export INGRESS_IP=$(kubectl get svc  -n ingress    ingress-nginx-ingress-controller -o jsonpath="{.status.loadBalancer.ingress[*].ip}")
+export INGRESS_IP=$(kubectl get svc ingress-nginx -o jsonpath="{.status.loadBalancer.ingress[*].ip}")
 ```
 
 Open `welcome-ingress.yaml` and `welcome-ingress-tls.yaml` to replace INGRESS_IP with your IP or use the `sed` command below:
